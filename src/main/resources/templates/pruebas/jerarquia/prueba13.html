@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <style>
+        .carta{
+            margin-left: 3px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <h1 th:text="${titulo}"></h1>
+    <ul>
+
+        <li th:each="preFlopE : ${preflop.getPreflopE169()}">
+            <h1><span th:text="${preFlopE.getPareja().mostrar()}"></span> <span th:text="${preFlopE.getEstadistica().getGano()}"></span></h1>
+        </li>
+    </ul>
+
+
+
+
+
+</body>
+</html>

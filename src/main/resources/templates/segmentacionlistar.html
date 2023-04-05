@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="${titulo}"></h1>
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Carta 1</th>
+            <th>Carta 2</th>
+            <th>Porcentaje</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="dato : ${segmentacion}">
+            <td th:text="${dato.id}"></td>
+            <td th:text="${dato.carta1}"></td>
+            <td th:text="${dato.carta2}"></td>
+            <td th:text="${dato.porcentaje}"></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <style>
+        .carta{
+            margin-left: 3px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <h1 th:text="${titulo}"></h1>
+    <ul>
+        <li>
+            <span th:each="numero : ${estadistica.getGanados()}">
+                <span th:text="${numero}"></span>&nbsp;
+            </span>
+        </li>
+
+        <li>
+            Total:<span th:text="${estadistica.getTotal()}"></span>
+        </li>
+        <li>
+            Porcentaje: <span th:text="${estadistica.getPorcentaje()}"></h1>
+        </li>
+
+    </ul>
+
+
+
+
+
+</body>
+</html>

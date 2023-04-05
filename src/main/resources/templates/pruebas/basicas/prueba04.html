@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <style>
+        .carta{
+            margin-left: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1 th:text="${titulo}"></h1>
+    <span th:each="carta : ${cartas}" >
+        <span th:text="${carta.getNumeroLetra()+carta.getPaloLetra()}"} class="carta"></span>
+    </span>
+    <ul>
+        <li th:each="asiento : ${asientos}">
+            <div>
+                <h1>Jugador <span th:text="${asiento.getJugador().getPosicion()}"></span>: <span th:text="${asiento.getPareja().mostrar()}"></span></h1>
+            </div>
+        </li>
+    </ul>
+    <h1>Comunitarias: <span th:text="${comunitarias.mostrar()}"></span></h1>
+
+    <h1>Ganadores</h1>
+    <ul>
+        <li th:each="ganador : ${ganadores}">
+            <h1>
+                <span>Ganador:</span>
+                <span th:text="${ganador.getPosicion()}"></span>
+                <span>Jerarquia:</span>
+                <span th:text="${ganador.getJerarquia5().mostrar()}"></span>
+            </h1>
+        </li>
+    </ul>
+</body>
+</html>
