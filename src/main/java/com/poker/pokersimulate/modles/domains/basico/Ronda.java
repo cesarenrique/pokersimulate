@@ -110,12 +110,14 @@ public class Ronda {
 
         Integer pos = 0;
         for (Asiento asiento : mesa.getAsientos()) {
-            if(igualo.contains(asiento.getPosicion())) {
-                PosJerarquia5 posJerarquia5 = new PosJerarquia5();
-                posJerarquia5.setJerarquia5(asiento.getRango().get(0));
-                posJerarquia5.setPosicion(pos);
-                unificar.add(posJerarquia5);
+            for(Integer estesi: igualo) {
+                if (estesi.equals(asiento.getPosicion())) {
+                    PosJerarquia5 posJerarquia5 = new PosJerarquia5();
+                    posJerarquia5.setJerarquia5(asiento.getRango().get(0));
+                    posJerarquia5.setPosicion(pos);
+                    unificar.add(posJerarquia5);
 
+                }
             }
             pos++;
         }
@@ -206,5 +208,7 @@ public class Ronda {
         for (Asiento asiento : mesa.getAsientos()) {
             if(asiento.getPareja()!=null) asiento.clear();
         }
+        rankings.clear();
+        igualadas.clear();
     }
 }

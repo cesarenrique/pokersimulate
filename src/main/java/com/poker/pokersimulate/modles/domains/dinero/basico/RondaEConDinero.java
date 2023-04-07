@@ -1,6 +1,7 @@
 package com.poker.pokersimulate.modles.domains.dinero.basico;
 
 import com.poker.pokersimulate.modles.domains.basico.Asiento;
+import com.poker.pokersimulate.modles.domains.basico.Ganador;
 import com.poker.pokersimulate.modles.domains.basico.Ranking;
 import com.poker.pokersimulate.modles.domains.estadistica.RondaE;
 
@@ -90,7 +91,6 @@ public class RondaEConDinero extends RondaE {
     }
 
     public void repartirRecompensa(){
-
         boolean fallo=false;
         int aux=botePrincipal.size()-1;
         int anterior=-1;
@@ -114,10 +114,12 @@ public class RondaEConDinero extends RondaE {
                 int recompensa = botePrincipal.get(0) / rank.get(0).getPosRankings().get(0).getGanadores().size();
                 ArrayList<Asiento> asientos = getMesa().getAsientos();
                 for (Asiento asiento : asientos) {
-                    if(rank.get(0).getPosRankings().get(0).getGanadores().contains(asiento.getPosicion())) {
-                        Integer fichasActual = ((AsientoConFichas) asiento).getFichas();
-                        fichasActual += recompensa;
-                        ((AsientoConFichas) asiento).setFichas(fichasActual);
+                    for(Ganador ganador:rank.get(0).getPosRankings().get(0).getGanadores()) {
+                        if (ganador.getPosicion().equals(asiento.getPosicion())) {
+                            Integer fichasActual = ((AsientoConFichas) asiento).getFichas();
+                            fichasActual += recompensa;
+                            ((AsientoConFichas) asiento).setFichas(fichasActual);
+                        }
                     }
                 }
                 botePrincipal.remove(botePrincipal.get(0));
@@ -294,4 +296,10 @@ public class RondaEConDinero extends RondaE {
         return quien;
     }
 
+    @Override
+    public void clear() {
+        super.clear();
+        limpiarMesa();
+        limpiarSigue();
+    }
 }

@@ -1,6 +1,13 @@
 package com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico;
 
-import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EuristicaPreflopLinealExpand;
+import com.poker.pokersimulate.modles.domains.basico.Asiento;
+import com.poker.pokersimulate.modles.domains.basico.Combinacion7;
+import com.poker.pokersimulate.modles.domains.basico.Pareja;
+import com.poker.pokersimulate.modles.domains.dinero.basico.AsientoConFichas;
+import com.poker.pokersimulate.modles.domains.dinero.basico.JugadorNormal;
+import com.poker.pokersimulate.modles.domains.dinero.basico.MesaConDinero2;
+import com.poker.pokersimulate.modles.domains.dinero.basico.RondaEConDinero;
+import com.poker.pokersimulate.modles.domains.estadistica.RondaE;
 import com.poker.pokersimulate.modles.domains.estadistica.SimulacionE;
 
 import java.util.ArrayList;
@@ -11,10 +18,9 @@ public class SimulacionS extends SimulacionE {
 
     public SimulacionS() {
         super();
-        setRepeticiones(100000);
+        setRepeticiones(10000);
     }
 
-/*
     public ArrayList<EuristicaPreflopLinealExpand> getEuristicas() {
         return euristicas;
     }
@@ -24,72 +30,61 @@ public class SimulacionS extends SimulacionE {
     }
 
     @Override
-    public Mesa generarAsientos(Mesa mesa) {
-        mesa.generarAsientos();
-        return mesa;
+    public void injectarRondaOportuna(){
+        getPartida().setRonda(new RondaEPreflop());
     }
 
     @Override
-    public Ronda inyectarEstadisticaOportuna(Ronda ronda) {
-        Estadistica estadistica=new EstadisticaA2();
-        ((RondaE)ronda).setEstadistica(estadistica);
-        return ronda;
+    public void inyectarEstadisticaOportuna() {
+        ((RondaE)getPartida().getRonda()).setEstadistica(new EstadisticaA2());
     }
 
     @Override
-    public void generarPartida(Ronda ronda) {
-        PartidaEAllPreflopS partida = new PartidaEAllPreflopS();
-        partida.setEuristicas(euristicas);
-        partida.setRonda(ronda);
-        setPartida(partida);
+    public void inyectarPartida() {
+        setPartida(new PartidaEAllPreflopS());
     }
 
     @Override
-    public void simularPartida() {
-        PartidaEAllPreflopS partida=(PartidaEAllPreflopS) getPartida();
-        partida.iterarRondas(getRepeticiones());
-        partida.finalizarPartida();
-    }
-
-    @Override
-    public Ronda inyectarMesaOportuna(Ronda ronda) {
-        Mesa mesa = new MesaConDinero2();
-        ronda.setMesa(mesa);
-        return ronda;
-    }
-
-    @Override
-    public Ronda prepararMesa(Ronda ronda){
-        Mesa mesa = generarAsientos(ronda.getMesa());
-        ArrayList<Asiento> asientos = mesa.getAsientos();
-        Integer contador = 0;
-        for (Asiento asiento : asientos) {
-            Jugador j = new JugadorNormal();
-            ((JugadorNormal) j).setSaldo(0);
-            Combinacion7 combinacion7 = new Combinacion7();
-            Pareja p = new Pareja();
-            asiento.setJugador(j);
-            asiento.setCombinacion7(combinacion7);
-            asiento.setPosicion(contador);
-            asiento.setPareja(p);
-            ((AsientosConFichas) asiento).setFichas(100);
-            contador++;
-        }
-        return ronda;
-    }
-
-    @Override
-    public Ronda injectarRondaOportuna() {
-        Ronda ronda=new RondaEPreflop();
-        return ronda;
+    public void inyectarMesaOportuna() {
+        getPartida().getRonda().setMesa(new MesaConDinero2());
     }
 
     @Override
     public void prepararPartida() {
-        super.prepararPartida();
-        ((RondaEConDinero) getPartida().getRonda()).limpiarApuestasyBote();
+        inyectarPartida();
+        injectarRondaOportuna();
+        inyectarBaraja();
+        inyectarMesaOportuna();
+        prepararMesa();
+        inyectarEstadisticaOportuna();
+        ((PartidaEAllPreflopS)getPartida()).setEuristicas(euristicas);
+        ((RondaEConDinero) getPartida().getRonda()).limpiarMesa();
         ((RondaEConDinero) getPartida().getRonda()).limpiarSigue();
     }
-*/
+
+    @Override
+    public void prepararMesa(){
+
+        getPartida().getRonda().getMesa().generarAsientos();
+        Integer contador2 = 0;
+        for (Asiento asiento : getPartida().getRonda().getMesa().getAsientos()) {
+            asiento.setJugador(new JugadorNormal());
+            ((JugadorNormal)asiento.getJugador()).setSaldo(-200);
+            asiento.setCombinacion7(new Combinacion7());
+            asiento.setPareja(new Pareja());
+            asiento.setPosicion(contador2);
+            ((AsientoConFichas) asiento).setFichas(100);
+            contador2++;
+        }
+
+    }
+
+    @Override
+    public void simularPartida() {
+        getPartida().iterarRondas(getRepeticiones());
+        ((PartidaEAllPreflopS)getPartida()).finalizarPartida();
+    }
+
+
 
 }

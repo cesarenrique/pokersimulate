@@ -7,7 +7,7 @@ public class Partida {
 
     private Ronda ronda;
 
-    private boolean seguir;
+    private Integer seguir;
     private Integer contador;
     private Integer debug;
     private String informe;
@@ -33,11 +33,11 @@ public class Partida {
         this.debug = debug;
     }
 
-    public boolean isSeguir() {
+    public Integer getSeguir() {
         return seguir;
     }
 
-    public void setSeguir(boolean seguir) {
+    public void setSeguir(Integer seguir) {
         this.seguir = seguir;
     }
 

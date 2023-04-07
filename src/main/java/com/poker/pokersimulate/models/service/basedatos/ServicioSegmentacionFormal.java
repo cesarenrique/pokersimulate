@@ -9,10 +9,12 @@ import com.poker.pokersimulate.modles.domains.jerarquia.PreflopE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
-@Component
+@Service
 public class ServicioSegmentacionFormal {
     @Autowired
     @Qualifier("SegmentacionFormalDAOImpl")
@@ -42,10 +44,17 @@ public class ServicioSegmentacionFormal {
             SegmentacionFormal seg=new SegmentacionFormal();
             seg.setNumero1(preflopE.getPareja().getCartas().get(0).getNumero());
             seg.setNumero2(preflopE.getPareja().getCartas().get(1).getNumero());
-            seg.setPalo1(preflopE.getPareja().getCartas().get(0).getNumero());
-            seg.setPalo2(preflopE.getPareja().getCartas().get(1).getNumero());
+            seg.setPalo1(preflopE.getPareja().getCartas().get(0).getPalo());
+            seg.setPalo2(preflopE.getPareja().getCartas().get(1).getPalo());
             seg.setPorcentaje(preflopE.getEstadistica().getGano());
             segmentacionFormalDAO.save(seg);
         }
+    }
+
+    public ArrayList<SegmentacionFormal> listaSegmentada() {
+        Iterable<SegmentacionFormal> segmentacionFormals = segmentacionFormalDAO.findAll();
+        List<SegmentacionFormal> result=new ArrayList<>();
+        segmentacionFormals.forEach(result::add);
+        return (ArrayList<SegmentacionFormal>) result;
     }
 }

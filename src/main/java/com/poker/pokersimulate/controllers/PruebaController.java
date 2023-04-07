@@ -1,12 +1,17 @@
 package com.poker.pokersimulate.controllers;
 
 import com.poker.pokersimulate.models.data.PreFlopEData;
+import com.poker.pokersimulate.models.entity.SegmentacionFormal;
+import com.poker.pokersimulate.models.service.basedatos.ServicioSegmentacionFormal;
 import com.poker.pokersimulate.models.service.basico.ServicioFuncionalidadBasico;
 import com.poker.pokersimulate.models.service.informe.ServicioFuncionalidadInforme;
 import com.poker.pokersimulate.modles.domains.basico.Asiento;
 import com.poker.pokersimulate.modles.domains.basico.Ronda;
 import com.poker.pokersimulate.modles.domains.basico.Simulacion;
-import com.poker.pokersimulate.modles.domains.dinero.preflop.jerarquiaDinero.EstadisticaA;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.SimulacionS;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.SimulacionS6;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EstadisticaA;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.basico.SimulacionST;
 import com.poker.pokersimulate.modles.domains.estadistica.RondaE;
 import com.poker.pokersimulate.modles.domains.estadistica.SimulacionE;
 import com.poker.pokersimulate.modles.domains.estadistica.SimulacionE6;
@@ -22,6 +27,8 @@ import java.util.ArrayList;
 @Controller
 public class PruebaController {
 
+    @Autowired
+    private ServicioSegmentacionFormal servicioSegmentacionFormal;
 
     @Autowired
     private ServicioFuncionalidadBasico servicioFuncionalidadBasico;
@@ -194,7 +201,7 @@ public class PruebaController {
     public String prueba15(ModelMap model){
 
 
-        model.addAttribute("titulo", "Prueba 15 - SimulacionJAll6 - Mesa 2 - Informe");
+        model.addAttribute("titulo", "Prueba 15 - SimulacionJAll6 - Mesa 6 - Informe");
         model.addAttribute("informe", servicioFuncionalidadInforme.simulacionJAll6().getPartida().getInforme());
         return "pruebas/dinero/prueba15";
     }
@@ -232,5 +239,84 @@ public class PruebaController {
         model.addAttribute("titulo", "Prueba 17 - SimulacionJAll6General - Mesa 6 - Estadistica");
         model.addAttribute("data", data);
         return "pruebas/dinero/prueba17";
+    }
+
+    @GetMapping(value="/prueba18")
+    public String prueba18(ModelMap model){
+
+        model.addAttribute("titulo", "Prueba 18 - SimulacionJAll6 - Mesa 2 - Informe - check");
+        model.addAttribute("informe", servicioFuncionalidadInforme.simulacionJAllcheck().getPartida().getInforme());
+        return "pruebas/dinero/prueba18";
+    }
+
+
+    @GetMapping(value="/prueba19")
+    public String prueba19(ModelMap model){
+
+
+        model.addAttribute("titulo", "Prueba 19 - SimulacionJAll6 - Mesa 6 - Informe -check");
+        model.addAttribute("informe", servicioFuncionalidadInforme.simulacionJAll6check().getPartida().getInforme());
+        return "pruebas/dinero/prueba19";
+    }
+
+    @GetMapping(value="/prueba20")
+    public String prueba20(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionS simulacionS= servicioFuncionalidadInforme.simulacionSInforme(formal);
+
+        model.addAttribute("titulo", "Prueba 20 - SimulacionS - Mesa 2 - Informe ");
+        model.addAttribute("informe", simulacionS.getPartida().getInforme() );
+        return "pruebas/postflop/prueba20";
+    }
+
+    @GetMapping(value="/prueba21")
+    public String prueba21(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionS simulacion= servicioFuncionalidadInforme.simulacionS(formal);
+
+        model.addAttribute("titulo", "Prueba 21 - SimulacionS - Mesa 2 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/prueba21";
+    }
+
+
+    @GetMapping(value="/prueba22")
+    public String prueba22(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionS6 simulacion= servicioFuncionalidadInforme.simulacionS6Informe(formal);
+
+        model.addAttribute("titulo", "Prueba 22 - SimulacionS - Mesa 6 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/prueba22";
+    }
+
+    @GetMapping(value="/prueba23")
+    public String prueba23(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionS6 simulacion= servicioFuncionalidadInforme.simulacionS6(formal);
+
+        model.addAttribute("titulo", "Prueba 20 - SimulacionS - Mesa 6 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/prueba23";
+    }
+
+    @GetMapping(value="/prueba24")
+    public String prueba24(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionST simulacion= servicioFuncionalidadInforme.simulacionSTInforme(formal);
+
+        model.addAttribute("titulo", "Prueba 24 - SimulacionS - Mesa 2 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/turno/prueba24";
+    }
+
+    @GetMapping(value="/prueba25")
+    public String prueba25(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionST simulacion= servicioFuncionalidadInforme.simulacionST(formal);
+
+        model.addAttribute("titulo", "Prueba 20 - SimulacionS - Mesa 2 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/turno/prueba25";
     }
 }

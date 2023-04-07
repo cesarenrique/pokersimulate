@@ -1,8 +1,11 @@
 package com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico;
 
+import com.poker.pokersimulate.modles.domains.basico.Asiento;
 import com.poker.pokersimulate.modles.domains.basico.Ganador;
 import com.poker.pokersimulate.modles.domains.basico.PosRanking;
 import com.poker.pokersimulate.modles.domains.basico.Ranking;
+import com.poker.pokersimulate.modles.domains.dinero.basico.AsientoConFichas;
+import com.poker.pokersimulate.modles.domains.dinero.basico.JugadorNormal;
 import com.poker.pokersimulate.modles.domains.dinero.basico.RondaEConDinero;
 
 

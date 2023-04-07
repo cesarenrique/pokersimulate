@@ -1,6 +1,12 @@
 package com.poker.pokersimulate.models.service.informe;
 
+import com.poker.pokersimulate.models.entity.SegmentacionFormal;
 import com.poker.pokersimulate.modles.domains.basico.*;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EuristicaPreflopLineal;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EuristicaPreflopLinealExpand;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.SimulacionS;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.SimulacionS6;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.basico.SimulacionST;
 import com.poker.pokersimulate.modles.domains.dinero.preflop.jerarquiaDinero.PartidaEAllPreflop;
 import com.poker.pokersimulate.modles.domains.dinero.preflop.jerarquiaDinero.SimulacionJAll;
 import com.poker.pokersimulate.modles.domains.dinero.preflop.jerarquiaDinero.SimulacionJAll6;
@@ -299,4 +305,278 @@ public class ServicioFuncionalidadInforme {
 
         return simulacion;
     }
+
+
+    public SimulacionJAll simulacionJAllcheck(){
+
+        SupraSegmentacion supra=new SupraSegmentacion();
+        supra.generarSupra();
+        PreFlopE169 preFlopE169=new PreFlopE169();
+        SimulacionJAll simulacion=new SimulacionJAll();
+        simulacion.setRepeticiones(200);
+        simulacion.setPreFlop(preFlopE169);
+        simulacion.setSupra(supra);
+        simulacion.setPosicion(0);
+        simulacion.prepararPartida();
+        simulacion.getPartida().setDebug(2);
+        simulacion.simularPartida();
+
+        return simulacion;
+    }
+
+    public SimulacionJAll6 simulacionJAll6check(){
+
+        SupraSegmentacion supra=new SupraSegmentacion();
+        supra.generarSupra();
+        PreFlopE169 preFlopE169=new PreFlopE169();
+        SimulacionJAll6 simulacion=new SimulacionJAll6();
+        simulacion.setRepeticiones(200);
+        simulacion.setPreFlop(preFlopE169);
+        simulacion.setSupra(supra);
+        simulacion.setPosicion(0);
+        simulacion.prepararPartida();
+        simulacion.getPartida().setDebug(2);
+        simulacion.simularPartida();
+
+        return simulacion;
+    }
+
+    public SimulacionS simulacionS(ArrayList<SegmentacionFormal> formal){
+
+        EuristicaPreflopLineal eu1=new EuristicaPreflopLineal();
+        eu1.retructurarDatos(formal);
+        eu1.setProfundidad(50);
+
+        EuristicaPreflopLineal eu2=new EuristicaPreflopLineal();
+        eu2.retructurarDatos(formal);
+        eu2.setProfundidad(100);
+
+        EuristicaPreflopLinealExpand eu1E = new EuristicaPreflopLinealExpand();
+        eu1E.expandir(eu1);
+
+        EuristicaPreflopLinealExpand eu2E = new EuristicaPreflopLinealExpand();
+        eu2E.expandir(eu2);
+
+        ArrayList<EuristicaPreflopLinealExpand> euristicas=new ArrayList<>();
+        euristicas.add(eu1E);
+        euristicas.add(eu2E);
+
+        SimulacionS simulacion=new SimulacionS();
+        simulacion.setEuristicas(euristicas);
+        simulacion.prepararPartida();
+        simulacion.simularPartida();
+
+        return simulacion;
+    }
+
+    public SimulacionS simulacionSInforme(ArrayList<SegmentacionFormal> formal){
+
+        EuristicaPreflopLineal eu1=new EuristicaPreflopLineal();
+        eu1.retructurarDatos(formal);
+        eu1.setProfundidad(50);
+
+        EuristicaPreflopLineal eu2=new EuristicaPreflopLineal();
+        eu2.retructurarDatos(formal);
+        eu2.setProfundidad(100);
+
+        EuristicaPreflopLinealExpand eu1E = new EuristicaPreflopLinealExpand();
+        eu1E.expandir(eu1);
+
+        EuristicaPreflopLinealExpand eu2E = new EuristicaPreflopLinealExpand();
+        eu2E.expandir(eu2);
+
+        ArrayList<EuristicaPreflopLinealExpand> euristicas=new ArrayList<>();
+        euristicas.add(eu1E);
+        euristicas.add(eu2E);
+
+        SimulacionS simulacion=new SimulacionS();
+        simulacion.setRepeticiones(200);
+        simulacion.setEuristicas(euristicas);
+        simulacion.prepararPartida();
+        simulacion.getPartida().setDebug(1);
+        simulacion.simularPartida();
+
+        return simulacion;
+    }
+
+    public SimulacionS6 simulacionS6Informe(ArrayList<SegmentacionFormal> formal){
+
+        EuristicaPreflopLineal eu1=new EuristicaPreflopLineal();
+        eu1.retructurarDatos(formal);
+        eu1.setProfundidad(190);
+
+        EuristicaPreflopLineal eu2=new EuristicaPreflopLineal();
+        eu2.retructurarDatos(formal);
+        eu2.setProfundidad(130);
+
+        EuristicaPreflopLineal eu3=new EuristicaPreflopLineal();
+        eu3.retructurarDatos(formal);
+        eu3.setProfundidad(90);
+
+        EuristicaPreflopLineal eu4=new EuristicaPreflopLineal();
+        eu4.retructurarDatos(formal);
+        eu4.setProfundidad(50);
+
+        EuristicaPreflopLineal eu5=new EuristicaPreflopLineal();
+        eu5.retructurarDatos(formal);
+        eu5.setProfundidad(30);
+
+        EuristicaPreflopLineal eu6=new EuristicaPreflopLineal();
+        eu6.retructurarDatos(formal);
+        eu6.setProfundidad(20);
+
+        EuristicaPreflopLinealExpand eu1E = new EuristicaPreflopLinealExpand();
+        eu1E.expandir(eu1);
+
+        EuristicaPreflopLinealExpand eu2E = new EuristicaPreflopLinealExpand();
+        eu2E.expandir(eu2);
+
+        EuristicaPreflopLinealExpand eu3E = new EuristicaPreflopLinealExpand();
+        eu3E.expandir(eu3);
+
+        EuristicaPreflopLinealExpand eu4E = new EuristicaPreflopLinealExpand();
+        eu4E.expandir(eu4);
+
+        EuristicaPreflopLinealExpand eu5E = new EuristicaPreflopLinealExpand();
+        eu5E.expandir(eu5);
+
+        EuristicaPreflopLinealExpand eu6E = new EuristicaPreflopLinealExpand();
+        eu6E.expandir(eu6);
+
+        ArrayList<EuristicaPreflopLinealExpand> euristicas=new ArrayList<>();
+        euristicas.add(eu1E);
+        euristicas.add(eu2E);
+        euristicas.add(eu3E);
+        euristicas.add(eu4E);
+        euristicas.add(eu5E);
+        euristicas.add(eu6E);
+
+        SimulacionS6 simulacion=new SimulacionS6();
+        simulacion.setRepeticiones(50);
+        simulacion.setEuristicas(euristicas);
+        simulacion.prepararPartida();
+        simulacion.getPartida().setDebug(1);
+        simulacion.simularPartida();
+
+        return simulacion;
+    }
+
+    public SimulacionS6 simulacionS6(ArrayList<SegmentacionFormal> formal){
+
+        EuristicaPreflopLineal eu1=new EuristicaPreflopLineal();
+        eu1.retructurarDatos(formal);
+        eu1.setProfundidad(90);
+
+        EuristicaPreflopLineal eu2=new EuristicaPreflopLineal();
+        eu2.retructurarDatos(formal);
+        eu2.setProfundidad(80);
+
+        EuristicaPreflopLineal eu3=new EuristicaPreflopLineal();
+        eu3.retructurarDatos(formal);
+        eu3.setProfundidad(70);
+
+        EuristicaPreflopLineal eu4=new EuristicaPreflopLineal();
+        eu4.retructurarDatos(formal);
+        eu4.setProfundidad(60);
+
+        EuristicaPreflopLineal eu5=new EuristicaPreflopLineal();
+        eu5.retructurarDatos(formal);
+        eu5.setProfundidad(40);
+
+        EuristicaPreflopLineal eu6=new EuristicaPreflopLineal();
+        eu6.retructurarDatos(formal);
+        eu6.setProfundidad(20);
+
+        EuristicaPreflopLinealExpand eu1E = new EuristicaPreflopLinealExpand();
+        eu1E.expandir(eu1);
+
+        EuristicaPreflopLinealExpand eu2E = new EuristicaPreflopLinealExpand();
+        eu2E.expandir(eu2);
+
+        EuristicaPreflopLinealExpand eu3E = new EuristicaPreflopLinealExpand();
+        eu3E.expandir(eu3);
+
+        EuristicaPreflopLinealExpand eu4E = new EuristicaPreflopLinealExpand();
+        eu4E.expandir(eu4);
+
+        EuristicaPreflopLinealExpand eu5E = new EuristicaPreflopLinealExpand();
+        eu5E.expandir(eu5);
+
+        EuristicaPreflopLinealExpand eu6E = new EuristicaPreflopLinealExpand();
+        eu6E.expandir(eu6);
+
+        ArrayList<EuristicaPreflopLinealExpand> euristicas=new ArrayList<>();
+        euristicas.add(eu1E);
+        euristicas.add(eu2E);
+        euristicas.add(eu3E);
+        euristicas.add(eu4E);
+        euristicas.add(eu5E);
+        euristicas.add(eu6E);
+
+        SimulacionS6 simulacion=new SimulacionS6();
+        simulacion.setEuristicas(euristicas);
+        simulacion.prepararPartida();
+        simulacion.simularPartida();
+
+        return simulacion;
+    }
+
+    public SimulacionST simulacionSTInforme(ArrayList<SegmentacionFormal> formal){
+
+        EuristicaPreflopLineal eu1=new EuristicaPreflopLineal();
+        eu1.retructurarDatos(formal);
+        eu1.setProfundidad(190);
+
+        EuristicaPreflopLineal eu2=new EuristicaPreflopLineal();
+        eu2.retructurarDatos(formal);
+        eu2.setProfundidad(20);
+
+        EuristicaPreflopLinealExpand eu1E = new EuristicaPreflopLinealExpand();
+        eu1E.expandir(eu1);
+
+        EuristicaPreflopLinealExpand eu2E = new EuristicaPreflopLinealExpand();
+        eu2E.expandir(eu2);
+
+        ArrayList<EuristicaPreflopLinealExpand> euristicas=new ArrayList<>();
+        euristicas.add(eu1E);
+        euristicas.add(eu2E);
+
+        SimulacionST simulacion=new SimulacionST();
+        simulacion.setRepeticiones(50);
+        simulacion.setEuristicas(euristicas);
+        simulacion.prepararPartida();
+        simulacion.getPartida().setDebug(1);
+        simulacion.simularPartida();
+
+        return simulacion;
+    }
+
+    public SimulacionST simulacionST(ArrayList<SegmentacionFormal> formal){
+
+        EuristicaPreflopLineal eu1=new EuristicaPreflopLineal();
+        eu1.retructurarDatos(formal);
+        eu1.setProfundidad(50);
+
+        EuristicaPreflopLineal eu2=new EuristicaPreflopLineal();
+        eu2.retructurarDatos(formal);
+        eu2.setProfundidad(100);
+
+        EuristicaPreflopLinealExpand eu1E = new EuristicaPreflopLinealExpand();
+        eu1E.expandir(eu1);
+
+        EuristicaPreflopLinealExpand eu2E = new EuristicaPreflopLinealExpand();
+        eu2E.expandir(eu2);
+
+        ArrayList<EuristicaPreflopLinealExpand> euristicas=new ArrayList<>();
+        euristicas.add(eu1E);
+        euristicas.add(eu2E);
+
+        SimulacionST simulacion=new SimulacionST();
+        simulacion.setEuristicas(euristicas);
+        simulacion.prepararPartida();
+        simulacion.simularPartida();
+
+        return simulacion;
+    }
+
 }

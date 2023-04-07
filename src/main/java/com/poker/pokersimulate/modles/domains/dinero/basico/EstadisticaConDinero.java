@@ -17,7 +17,7 @@ public class EstadisticaConDinero extends Estadistica {
         return saldos;
     }
 
-    public void setSaldo(ArrayList<Integer> saldos) {
+    public void setSaldos(ArrayList<Integer> saldos) {
         this.saldos = saldos;
     }
 

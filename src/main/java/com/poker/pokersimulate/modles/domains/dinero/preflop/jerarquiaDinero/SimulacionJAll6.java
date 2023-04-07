@@ -1,10 +1,7 @@
 package com.poker.pokersimulate.modles.domains.dinero.preflop.jerarquiaDinero;
 
-import com.poker.pokersimulate.modles.domains.basico.Mesa6;
-import com.poker.pokersimulate.modles.domains.estadistica.Estadistica;
-import com.poker.pokersimulate.modles.domains.basico.Mesa;
-import com.poker.pokersimulate.modles.domains.basico.Ronda;
-import com.poker.pokersimulate.modles.domains.estadistica.Estadistica6;
+import com.poker.pokersimulate.modles.domains.dinero.basico.EstadisticaConDinero6;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EstadisticaA6;
 import com.poker.pokersimulate.modles.domains.estadistica.RondaE;
 import com.poker.pokersimulate.modles.domains.dinero.basico.MesaConDinero6;
 
@@ -15,7 +12,7 @@ public class SimulacionJAll6 extends SimulacionJAll {
 
     @Override
     public void inyectarEstadisticaOportuna(){
-        ((RondaE)getPartida().getRonda()).setEstadistica(new EstadisticaA6());
+        ((RondaE)getPartida().getRonda()).setEstadistica(new EstadisticaConDinero6());
     }
 
     @Override

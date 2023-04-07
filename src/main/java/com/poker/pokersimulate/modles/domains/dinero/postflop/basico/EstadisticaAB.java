@@ -1,6 +1,6 @@
 package com.poker.pokersimulate.modles.domains.dinero.postflop.basico;
 
-import com.poker.pokersimulate.modles.domains.dinero.preflop.jerarquiaDinero.EstadisticaA;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EstadisticaA;
 
 import java.util.ArrayList;
 

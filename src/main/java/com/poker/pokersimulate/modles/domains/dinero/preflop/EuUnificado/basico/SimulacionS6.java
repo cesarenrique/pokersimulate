@@ -1,22 +1,19 @@
 package com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico;
 
-import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.SimulacionS;
+import com.poker.pokersimulate.modles.domains.dinero.basico.MesaConDinero6;
+import com.poker.pokersimulate.modles.domains.estadistica.RondaE;
 
 public class SimulacionS6 extends SimulacionS {
     public SimulacionS6() {
         super();
     }
-/*
     @Override
-    public Ronda inyectarMesaOportuna(Ronda ronda) {
-        Mesa mesa = new MesaConDinero6();
-        ronda.setMesa(mesa);
-        return ronda;
+    public void inyectarEstadisticaOportuna(){
+        ((RondaE)getPartida().getRonda()).setEstadistica(new EstadisticaA6());
     }
+
     @Override
-    public Ronda inyectarEstadisticaOportuna(Ronda ronda) {
-        Estadistica estadistica=new EstadisticaA6();
-        ((RondaE)ronda).setEstadistica(estadistica);
-        return ronda;
-    }*/
+    public void inyectarMesaOportuna() {
+        getPartida().getRonda().setMesa(new MesaConDinero6());
+    }
 }

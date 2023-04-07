@@ -3,6 +3,7 @@ package com.poker.pokersimulate.modles.domains.dinero.preflop.jerarquiaDinero;
 import com.poker.pokersimulate.modles.domains.basico.Asiento;
 import com.poker.pokersimulate.modles.domains.basico.Ganador;
 import com.poker.pokersimulate.modles.domains.dinero.basico.*;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EstadisticaA;
 
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class PartidaEAllPreflop extends PartidaEConDinero {
 
     @Override
     public void iterarRonda() {
+        Integer check1=preCheck();
         getRonda().clear();
         getRonda().repartirCartasJugadores();
         partidaPreflop();
@@ -24,16 +26,29 @@ public class PartidaEAllPreflop extends PartidaEConDinero {
         ejercerEstadistica();
         ((RondaEConDinero)getRonda()).limpiarMesa();
         ((RondaEConDinero) getRonda()).limpiarSigue();
+        Integer check2=preCheck();
         opcionRecompraFichas();
-        if(getDebug()==1) setInforme(getInforme()+generarInforme("Fin Ronda"));
+        if(getDebug()==1){
+            setInforme(getInforme()+generarInforme("Fin Ronda"));
+        }else if(getDebug()==2 && !check1.equals(check2)){
+            setInforme(getInforme()+"\nAlerta: Se esperaba "+check1+" se obtuvo: "+check2+"\n");
+            setInforme(getInforme()+generarInforme("Fin Ronda"));
+        }
         setContador(getContador()+1);
 
     }
 
     public void partidaPreflop() {
         hacerApuestas();
+        todosSiguieron();
         ((RondaEConDinero)getRonda()).simplificarBote();
         for(int i=0;i<((RondaEConDinero)getRonda()).getSigue().size();i++){
+            ((RondaEConDinero)getRonda()).getSigue().set(i,1);
+        }
+    }
+
+    public void todosSiguieron(){
+        for(int i=0;i<getRonda().getMesa().getTamanyo();i++){
             ((RondaEConDinero)getRonda()).getSigue().set(i,1);
         }
     }
@@ -71,7 +86,7 @@ public class PartidaEAllPreflop extends PartidaEConDinero {
     @Override
     public String generarInforme(String fase){
         String info="";
-        if(getDebug()==1) {
+        if(getDebug()==1 || getDebug()==2) {
             StringBuilder sb = new StringBuilder();
 
             String barra = "------------------";
