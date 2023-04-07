@@ -56,7 +56,7 @@ public class PartidaEAllPreflop extends PartidaEConDinero {
     public void hacerApuestas(){
         for(Asiento asiento:getRonda().getMesa().getAsientos()){
             Integer allin=((AsientoConFichas) asiento).getFichas();
-            ((RondaEConDinero) getRonda()).apuestaPreFlop(asiento.getPosicion(),allin);
+            ((RondaEConDinero) getRonda()).apuesta(asiento.getPosicion(),allin);
         }
     }
 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <style>
+        .carta{
+            margin-left: 3px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <h1 th:text="${titulo}"></h1>
+    <ul>
+        <li>
+            <h1> Ganados:
+                <span th:each="numero : ${estadistica.getGanados()}">
+                    <span th:text="${numero}"></span>&nbsp;
+                </span>
+            </h1>
+        </li>
+        <li>
+            <h1> Ganados Preflop:
+                <span th:each="numero : ${estadistica.getGanadosPreflop()}">
+                    <span th:text="${numero}"></span>&nbsp;
+                </span>
+            </h1>
+        </li>
+        <li>
+            <h1> Ganados Postflop:
+                <span th:each="numero : ${estadistica.getGanadosPostflop()}">
+                    <span th:text="${numero}"></span>&nbsp;
+                </span>
+            </h1>
+        </li>
+        <li>
+            <h1> Ganados Saldos:
+                <span th:each="numero : ${estadistica.getSaldos()}">
+                    <span th:text="${numero}"></span>&nbsp;
+                </span>
+            </h1>
+        </li>
+
+        <li>
+            Total:<span th:text="${estadistica.getTotal()}"></span>
+        </li>
+        <li>
+            Porcentaje: <span th:text="${estadistica.getPorcentaje()}"></h1>
+        </li>
+
+    </ul>
+
+
+
+
+
+</body>
+</html>

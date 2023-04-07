@@ -6,7 +6,7 @@ import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.
 public class SimulacionST extends SimulacionS {
     public SimulacionST() {
         super();
-        setRepeticiones(100000);
+        setRepeticiones(10000);
     }
     @Override
     public void inyectarPartida() {

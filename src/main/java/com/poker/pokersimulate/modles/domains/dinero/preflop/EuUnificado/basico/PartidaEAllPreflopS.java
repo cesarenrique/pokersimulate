@@ -14,18 +14,17 @@ import java.util.ArrayList;
 public class PartidaEAllPreflopS extends PartidaEConDinero {
 
 
-    private ArrayList<EuristicaPreflopLinealExpand> euristicas;
+    private ArrayList<RankingPreflopEuristicas> rankingPreflopEuristicas;
     public PartidaEAllPreflopS() {
         super();
     }
 
-
-    public ArrayList<EuristicaPreflopLinealExpand> getEuristicas() {
-        return euristicas;
+    public ArrayList<RankingPreflopEuristicas> getRankingPreflopEuristicas() {
+        return rankingPreflopEuristicas;
     }
 
-    public void setEuristicas(ArrayList<EuristicaPreflopLinealExpand> euristicas) {
-        this.euristicas = euristicas;
+    public void setRankingPreflopEuristicas(ArrayList<RankingPreflopEuristicas> rankingPreflopEuristicas) {
+        this.rankingPreflopEuristicas = rankingPreflopEuristicas;
     }
 
     @Override
@@ -77,9 +76,9 @@ public class PartidaEAllPreflopS extends PartidaEConDinero {
         int tam=asientos.size();
         for(int i=0;i<tam;i++){
 
-           if(euristicas.get(i).dentroEuristica(asientos.get(i).getPareja())) {
+           if(rankingPreflopEuristicas.get(i).getEuristicas().get(0).dentroEuristica(asientos.get(i).getPareja())) {
                 Integer allin = ((AsientoConFichas) asientos.get(i)).getFichas();
-                ((RondaEPreflop)getRonda()).apuestaPreFlop(asientos.get(i).getPosicion(), allin);
+                ((RondaEPreflop)getRonda()).apuesta(asientos.get(i).getPosicion(), allin);
                 ((RondaEPreflop)getRonda()).getSigue().set(i,1);
                 Integer estAnt= ((EstadisticaA)((RondaEPreflop) getRonda()).getEstadistica()).getPreflopSeguir().get(i);
                 estAnt++;

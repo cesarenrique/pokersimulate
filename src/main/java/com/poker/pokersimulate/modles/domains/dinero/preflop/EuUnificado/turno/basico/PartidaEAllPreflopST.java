@@ -22,7 +22,13 @@ public class PartidaEAllPreflopST extends PartidaEAllPreflopS {
         turnoPrincipalAnterior=1;
     }
 
+    public Integer getUltimo() {
+        return ultimo;
+    }
 
+    public void setUltimo(Integer ultimo) {
+        this.ultimo = ultimo;
+    }
 
     public Integer getTurnoPrincipalAnterior() {
         return turnoPrincipalAnterior;
@@ -50,7 +56,7 @@ public class PartidaEAllPreflopST extends PartidaEAllPreflopS {
 
     public void cambiarTurnoPreflop(){
         turnoPreflop++;
-        if(turnoPreflop==getRonda().getMesa().getTamanyo()){
+        if(turnoPreflop.equals(getRonda().getMesa().getTamanyo())){
             turnoPreflop=0;
         }
     }
@@ -58,37 +64,46 @@ public class PartidaEAllPreflopST extends PartidaEAllPreflopS {
     public void cambiarTurnoPrincipal(){
         turnoPrincipalAnterior=turnoPrincipal;
         turnoPrincipal++;
-        if(turnoPrincipal==getRonda().getMesa().getTamanyo()){
+        if(turnoPrincipal.equals(getRonda().getMesa().getTamanyo())){
             turnoPrincipal=0;
         }
     }
 
-
+    @Override
     public void hacerApuestas(){
         ArrayList<Asiento> asientos = getRonda().getMesa().getAsientos();
-        int tam=asientos.size();
+        cambiarTurnoPrincipal();
         turnoPreflop=turnoPrincipal;
         ultimo=turnoPrincipal;
-        cambiarTurnoPrincipal();
 
         do {
-            if (getEuristicas().get(turnoPreflop).dentroEuristica(asientos.get(turnoPreflop).getPareja())) {
+            if (getRankingPreflopEuristicas().get(turnoPreflop).getEuristicas().get(0).dentroEuristica(asientos.get(turnoPreflop).getPareja())) {
                 Integer allin = ((AsientoConFichas) asientos.get(turnoPreflop)).getFichas();
-                ((RondaEPreflop) getRonda()).apuestaPreFlop(asientos.get(turnoPreflop).getPosicion(), allin);
+                ((RondaEPreflop) getRonda()).apuesta(asientos.get(turnoPreflop).getPosicion(), allin);
                 ((RondaEPreflop) getRonda()).getSigue().set(turnoPreflop, 1);
-                Integer estAnt = ((EstadisticaA) ((RondaEPreflop) getRonda()).getEstadistica()).getPreflopSeguir().get(turnoPreflop);
-                estAnt++;
-                ((EstadisticaA) ((RondaEPreflop) getRonda()).getEstadistica()).getPreflopSeguir().set(turnoPreflop, estAnt);
             }
             cambiarTurnoPreflop();
-        }while(turnoPreflop!=ultimo);
+        }while(!turnoPreflop.equals(ultimo));
         Integer intencionSeguir=((RondaEPreflop)getRonda()).intencionSeguir();
         if(intencionSeguir==0){
             ((RondaEPreflop) getRonda()).getSigue().set(turnoPreflop, 1);
-            Integer estAnt = ((EstadisticaA) ((RondaEPreflop) getRonda()).getEstadistica()).getPreflopSeguir().get(turnoPreflop);
-            estAnt++;
-            ((EstadisticaA) ((RondaEPreflop) getRonda()).getEstadistica()).getPreflopSeguir().set(turnoPreflop, estAnt);
         }
+    }
+
+    public void marcarQuienSiguePreflop(){
+        for(int i=0;i<getRonda().getMesa().getTamanyo();i++) {
+            if( ((RondaEPreflop) getRonda()).getSigue().get(i)==1) {
+                Integer estAnt = ((EstadisticaA) ((RondaEPreflop) getRonda()).getEstadistica()).getPreflopSeguir().get(i);
+                estAnt++;
+                ((EstadisticaA) ((RondaEPreflop) getRonda()).getEstadistica()).getPreflopSeguir().set(i, estAnt);
+            }
+        }
+    }
+
+    @Override
+    public void partidaPreflop() {
+        super.partidaPreflop();
+        marcarQuienSiguePreflop();
     }
 
     @Override

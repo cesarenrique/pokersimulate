@@ -11,5 +11,9 @@ public class EstadisticaAB2 extends EstadisticaAB{
         getPostflopSeguir().add(0);
         getSaldos().add(0);
         getSaldos().add(0);
+        getGanadosPreflop().add(0);
+        getGanadosPreflop().add(0);
+        getGanadosPostflop().add(0);
+        getGanadosPostflop().add(0);
     }
 }

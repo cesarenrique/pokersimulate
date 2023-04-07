@@ -1,44 +1,49 @@
 package com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.ciegas;
 
+import com.poker.pokersimulate.modles.domains.dinero.basico.AsientoConFichas;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.RondaEPreflop;
 import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.basico.PartidaEAllPreflopST;
 
 public class PartidaEAllPreflopSTC extends PartidaEAllPreflopST {
     public PartidaEAllPreflopSTC() {
         super();
     }
-/*
+
     @Override
     public void iterarRonda() {
-
-        setSeguir(true);
-        Ronda ronda = getRonda();
-        ronda.clear();
-        ronda = apuestaObligatoria(ronda);
-        ronda = partidaPreflop(ronda);
-        if (isSeguir()) {
-            ronda=partidaPostflop(ronda);
+        Integer check1=preCheck();
+        setSeguir(0);
+        getRonda().clear();
+        apuestaObligatoria();
+        partidaPreflop();
+        if (getSeguir()==1) {
+            partidaPostflop();
         }else{
-            ronda=terminarPartidaEnPreflop(ronda);
+            terminarPartidaEnPreflop();
         }
-        ((RondaESTCPreflop)ronda).limpiarSigueCiega();
-        setRonda(ronda);
+        Integer check2=preCheck();
+        opcionRecompraFichas();
+        if(getDebug()==1){
+            setInforme(getInforme()+generarInforme("Fin Ronda"));
+        }else if(getDebug()==2 && !check1.equals(check2)){
+            setInforme(getInforme()+"\nAlerta: Se esperaba "+check1+" se obtuvo: "+check2+"\n");
+            setInforme(getInforme()+generarInforme("Fin Ronda"));
+        }
+        setContador(getContador()+1);
+
     }
 
-    public Ronda apuestaObligatoria(Ronda ronda) {
-        RondaESTCPreflop rondaE2ConDinero = (RondaESTCPreflop) ronda;
 
-        Integer total = ((AsientosConFichas) getRonda().getMesa().getAsientos().get(getTurnoPrincipal())).getFichas();
+
+    public void apuestaObligatoria(){
+        Integer total = ((AsientoConFichas) getRonda().getMesa().getAsientos().get(getTurnoPrincipal())).getFichas();
         Integer ciegaGrande=2;
         if(total<=2) ciegaGrande=total;
-        rondaE2ConDinero.apuestaCiegas(getRonda().getMesa().getAsientos().get(getTurnoPrincipal()).getPosicion(), ciegaGrande);
-        rondaE2ConDinero.getSigueCiega().set(getTurnoPrincipal(),1);
-        total = ((AsientosConFichas) getRonda().getMesa().getAsientos().get(getTurnoPrincipalAnterior())).getFichas();
+        ((RondaEPreflop) getRonda()).apuesta(getRonda().getMesa().getAsientos().get(getTurnoPrincipal()).getPosicion(), ciegaGrande);
+        total = ((AsientoConFichas) getRonda().getMesa().getAsientos().get(getTurnoPrincipalAnterior())).getFichas();
         Integer ciegaPeque=1;
         if(total<=1) ciegaPeque=total;
-        rondaE2ConDinero.apuestaCiegas(getRonda().getMesa().getAsientos().get(getTurnoPrincipalAnterior()).getPosicion(), ciegaPeque);
-
-        return rondaE2ConDinero;
+        ((RondaEPreflop) getRonda()).apuesta(getRonda().getMesa().getAsientos().get(getTurnoPrincipalAnterior()).getPosicion(), ciegaPeque);
     }
 
-*/
 }

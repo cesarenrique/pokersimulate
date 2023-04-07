@@ -1,6 +1,5 @@
 package com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico;
 
-import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EstadisticaA;
 
 public class EstadisticaA6 extends EstadisticaA {
     public EstadisticaA6() {

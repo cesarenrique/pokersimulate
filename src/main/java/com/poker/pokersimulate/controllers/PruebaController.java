@@ -12,6 +12,17 @@ import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.
 import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.SimulacionS6;
 import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EstadisticaA;
 import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.basico.SimulacionST;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.basico.SimulacionST6;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.ciegas.SimulacionSTC;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.ciegas.SimulacionSTC6;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.comeCiegas.SimulacionSTCC;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.comeCiegas.SimulacionSTCC6;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.comeCiegasSupra.SimulacionSTCCS;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.comeCiegasSupra.SimulacionSTCCS6;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.escalonado.Uniforme.nivel.golpe.SimulacionSTCCSENG;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.escalonado.Uniforme.nivel.golpe.SimulacionSTCCSENG6;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.escalonado.Uniforme.nivel.menor.SimulacionSTCCSENM;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.escalonado.Uniforme.nivel.menor.SimulacionSTCCSENM6;
 import com.poker.pokersimulate.modles.domains.estadistica.RondaE;
 import com.poker.pokersimulate.modles.domains.estadistica.SimulacionE;
 import com.poker.pokersimulate.modles.domains.estadistica.SimulacionE6;
@@ -295,7 +306,7 @@ public class PruebaController {
         ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
         SimulacionS6 simulacion= servicioFuncionalidadInforme.simulacionS6(formal);
 
-        model.addAttribute("titulo", "Prueba 20 - SimulacionS - Mesa 6 ");
+        model.addAttribute("titulo", "Prueba 23 - SimulacionS - Mesa 6 ");
         model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
         return "pruebas/postflop/prueba23";
     }
@@ -305,7 +316,7 @@ public class PruebaController {
         ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
         SimulacionST simulacion= servicioFuncionalidadInforme.simulacionSTInforme(formal);
 
-        model.addAttribute("titulo", "Prueba 24 - SimulacionS - Mesa 2 - Informe ");
+        model.addAttribute("titulo", "Prueba 24 - SimulacionST - Mesa 2 - Informe ");
         model.addAttribute("informe", simulacion.getPartida().getInforme() );
         return "pruebas/postflop/turno/prueba24";
     }
@@ -315,8 +326,228 @@ public class PruebaController {
         ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
         SimulacionST simulacion= servicioFuncionalidadInforme.simulacionST(formal);
 
-        model.addAttribute("titulo", "Prueba 20 - SimulacionS - Mesa 2 ");
+        model.addAttribute("titulo", "Prueba 25 - SimulacionST - Mesa 2 ");
         model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
         return "pruebas/postflop/turno/prueba25";
+    }
+
+    @GetMapping(value="/prueba26")
+    public String prueba26(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionST6 simulacion= servicioFuncionalidadInforme.simulacionST6Informe(formal);
+
+        model.addAttribute("titulo", "Prueba 26 - SimulacionST6 - Mesa 6 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/turno/prueba26";
+    }
+
+    @GetMapping(value="/prueba27")
+    public String prueba27(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionST6 simulacion= servicioFuncionalidadInforme.simulacionST6(formal);
+
+        model.addAttribute("titulo", "Prueba 27 - SimulacionST6 - Mesa 6 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/turno/prueba27";
+    }
+
+    @GetMapping(value="/prueba28")
+    public String prueba28(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTC simulacion= servicioFuncionalidadInforme.simulacionSTCInforme(formal);
+
+        model.addAttribute("titulo", "Prueba 28 - SimulacionSTC - Mesa 2 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/ciegas/prueba28";
+    }
+
+    @GetMapping(value="/prueba29")
+    public String prueba29(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTC simulacion= servicioFuncionalidadInforme.simulacionSTC(formal);
+
+        model.addAttribute("titulo", "Prueba 29 - SimulacionSTC - Mesa 2 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/ciegas/prueba29";
+    }
+
+    @GetMapping(value="/prueba30")
+    public String prueba30(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTC6 simulacion= servicioFuncionalidadInforme.simulacionSTC6Informe(formal);
+
+        model.addAttribute("titulo", "Prueba 30 - SimulacionSTC - Mesa 6 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/ciegas/prueba30";
+    }
+
+    @GetMapping(value="/prueba31")
+    public String prueba31(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTC6 simulacion= servicioFuncionalidadInforme.simulacionSTC6(formal);
+
+        model.addAttribute("titulo", "Prueba 31 - SimulacionSTC - Mesa 6 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/ciegas/prueba31";
+    }
+
+    @GetMapping(value="/prueba32")
+    public String prueba32(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCC simulacion= servicioFuncionalidadInforme.simulacionSTCCInforme(formal);
+
+        model.addAttribute("titulo", "Prueba 32 - SimulacionSTCC - Mesa 2 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/comeciegas/prueba32";
+    }
+
+    @GetMapping(value="/prueba33")
+    public String prueba33(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCC simulacion= servicioFuncionalidadInforme.simulacionSTCC(formal);
+
+        model.addAttribute("titulo", "Prueba 33 - SimulacionSTCC - Mesa 2 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/comeciegas/prueba33";
+    }
+
+    @GetMapping(value="/prueba34")
+    public String prueba34(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCC6 simulacion= servicioFuncionalidadInforme.simulacionSTCC6Informe(formal);
+
+        model.addAttribute("titulo", "Prueba 34 - SimulacionSTCC6 - Mesa 6 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/comeciegas/prueba34";
+    }
+
+    @GetMapping(value="/prueba35")
+    public String prueba35(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCC6 simulacion= servicioFuncionalidadInforme.simulacionSTCC6(formal);
+
+        model.addAttribute("titulo", "Prueba 35 - SimulacionSTCC - Mesa 6 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/comeciegas/prueba35";
+    }
+
+    @GetMapping(value="/prueba36")
+    public String prueba36(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCS simulacion= servicioFuncionalidadInforme.simulacionSTCCSInforme(formal);
+
+        model.addAttribute("titulo", "Prueba 36 - SimulacionSTCCS - Mesa 2 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/comeciegassupra/prueba36";
+    }
+
+    @GetMapping(value="/prueba37")
+    public String prueba37(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCS simulacion= servicioFuncionalidadInforme.simulacionSTCCS(formal);
+
+        model.addAttribute("titulo", "Prueba 37 - SimulacionSTCCS - Mesa 2 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/comeciegassupra/prueba37";
+    }
+
+    @GetMapping(value="/prueba38")
+    public String prueba38(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCS6 simulacion= servicioFuncionalidadInforme.simulacionSTCCS6Informe(formal);
+
+        model.addAttribute("titulo", "Prueba 38 - SimulacionSTCCS6 - Mesa 6 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/comeciegassupra/prueba38";
+    }
+
+    @GetMapping(value="/prueba39")
+    public String prueba39(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCS6 simulacion= servicioFuncionalidadInforme.simulacionSTCCS6(formal);
+
+        model.addAttribute("titulo", "Prueba 39 - SimulacionSTCCS6 - Mesa 6 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/comeciegassupra/prueba39";
+    }
+
+    @GetMapping(value="/prueba40")
+    public String prueba40(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCSENG simulacion= servicioFuncionalidadInforme.simulacionSTCCSEN2GInforme(formal);
+
+        model.addAttribute("titulo", "Prueba 40 - SimulacionSTCCSEN2 - Mesa 2 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/escalonado/prueba40";
+    }
+
+    @GetMapping(value="/prueba41")
+    public String prueba41(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCSENG simulacion= servicioFuncionalidadInforme.simulacionSTCCSEN2G(formal);
+
+        model.addAttribute("titulo", "Prueba 41 - SimulacionSTCCSEN2 - Mesa 2 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/escalonado/prueba41";
+    }
+
+    @GetMapping(value="/prueba42")
+    public String prueba42(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCSENG6 simulacion= servicioFuncionalidadInforme.simulacionSTCCSEN2G6Informe(formal);
+
+        model.addAttribute("titulo", "Prueba 42 - SimulacionSTCCSEN26 - Mesa 6 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/escalonado/prueba42";
+    }
+
+    @GetMapping(value="/prueba43")
+    public String prueba43(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCSENG6 simulacion= servicioFuncionalidadInforme.simulacionSTCCSEN2G6(formal);
+
+        model.addAttribute("titulo", "Prueba 43 - SimulacionSTCCSEN26 - Mesa 6 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/escalonado/prueba43";
+    }
+
+    @GetMapping(value="/prueba44")
+    public String prueba44(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCSENM simulacion= servicioFuncionalidadInforme.simulacionSTCCSEN2MInforme(formal);
+
+        model.addAttribute("titulo", "Prueba 44 - SimulacionSTCCSEN2M - Mesa 2 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/escalonado/prueba44";
+    }
+
+    @GetMapping(value="/prueba45")
+    public String prueba45(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCSENM simulacion= servicioFuncionalidadInforme.simulacionSTCCSEN2M(formal);
+
+        model.addAttribute("titulo", "Prueba 41 - SimulacionSTCCSEN2M - Mesa 2 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/escalonado/prueba45";
+    }
+
+    @GetMapping(value="/prueba46")
+    public String prueba46(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCSENM6 simulacion= servicioFuncionalidadInforme.simulacionSTCCSEN2M6Informe(formal);
+
+        model.addAttribute("titulo", "Prueba 46 - SimulacionSTCCSEN2M - Mesa 6 - Informe ");
+        model.addAttribute("informe", simulacion.getPartida().getInforme() );
+        return "pruebas/postflop/escalonado/prueba46";
+    }
+
+    @GetMapping(value="/prueba47")
+    public String prueba47(ModelMap model){
+        ArrayList<SegmentacionFormal> formal=servicioSegmentacionFormal.listaSegmentada();
+        SimulacionSTCCSENM6 simulacion= servicioFuncionalidadInforme.simulacionSTCCSEN2M6(formal);
+
+        model.addAttribute("titulo", "Prueba 47 - SimulacionSTCCSEN2M - Mesa 6 ");
+        model.addAttribute("estadistica", ((EstadisticaA)((RondaE)simulacion.getPartida().getRonda()).getEstadistica()));
+        return "pruebas/postflop/escalonado/prueba47";
     }
 }

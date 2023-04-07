@@ -48,11 +48,13 @@ public class RondaEConDinero extends RondaE {
 
 
 
-    public void apuestaPreFlop(Integer posicion, Integer apuesta){
+    public void apuesta(Integer posicion, Integer apuesta){
 
         Integer previo=apuestas.get(posicion);
         apuestas.set(posicion,apuesta+previo);
-        ((AsientoConFichas)getMesa().getAsientos().get(posicion)).setFichas(0);
+        Integer total=((AsientoConFichas)getMesa().getAsientos().get(posicion)).getFichas();
+        total-=apuesta;
+        ((AsientoConFichas)getMesa().getAsientos().get(posicion)).setFichas(total);
 
     }
 

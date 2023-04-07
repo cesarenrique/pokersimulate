@@ -1,12 +1,12 @@
-package com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.ciegas;
+package com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.escalonado.Uniforme.nivel.menor;
 
 import com.poker.pokersimulate.modles.domains.dinero.basico.MesaConDinero6;
 import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EstadisticaA6;
+import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.escalonado.Uniforme.nivel.golpe.SimulacionSTCCSENG;
 import com.poker.pokersimulate.modles.domains.estadistica.RondaE;
 
-public class SimulacionSTC6  extends SimulacionSTC{
-    public SimulacionSTC6() {
-        super();
+public class SimulacionSTCCSENM6 extends SimulacionSTCCSENG {
+    public SimulacionSTCCSENM6() {
     }
     @Override
     public void inyectarEstadisticaOportuna(){

@@ -1,11 +1,11 @@
-package com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.ciegas;
+package com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.turno.comeCiegasSupra;
 
 import com.poker.pokersimulate.modles.domains.dinero.basico.MesaConDinero6;
 import com.poker.pokersimulate.modles.domains.dinero.preflop.EuUnificado.basico.EstadisticaA6;
 import com.poker.pokersimulate.modles.domains.estadistica.RondaE;
 
-public class SimulacionSTC6  extends SimulacionSTC{
-    public SimulacionSTC6() {
+public class SimulacionSTCCS6  extends  SimulacionSTCCS{
+    public SimulacionSTCCS6() {
         super();
     }
     @Override

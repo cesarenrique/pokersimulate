@@ -14,19 +14,19 @@ import java.util.ArrayList;
 
 public class SimulacionS extends SimulacionE {
 
-    private ArrayList<EuristicaPreflopLinealExpand> euristicas;
+    private ArrayList<RankingPreflopEuristicas> rankingPreflopEuristicas;
 
     public SimulacionS() {
         super();
         setRepeticiones(10000);
     }
 
-    public ArrayList<EuristicaPreflopLinealExpand> getEuristicas() {
-        return euristicas;
+    public ArrayList<RankingPreflopEuristicas> getRankingPreflopEuristicas() {
+        return rankingPreflopEuristicas;
     }
 
-    public void setEuristicas(ArrayList<EuristicaPreflopLinealExpand> euristicas) {
-        this.euristicas = euristicas;
+    public void setRankingPreflopEuristicas(ArrayList<RankingPreflopEuristicas> rankingPreflopEuristicas) {
+        this.rankingPreflopEuristicas = rankingPreflopEuristicas;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class SimulacionS extends SimulacionE {
         inyectarMesaOportuna();
         prepararMesa();
         inyectarEstadisticaOportuna();
-        ((PartidaEAllPreflopS)getPartida()).setEuristicas(euristicas);
+        ((PartidaEAllPreflopS)getPartida()).setRankingPreflopEuristicas(rankingPreflopEuristicas);
         ((RondaEConDinero) getPartida().getRonda()).limpiarMesa();
         ((RondaEConDinero) getPartida().getRonda()).limpiarSigue();
     }
